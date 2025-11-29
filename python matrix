@@ -1,0 +1,5 @@
+import numpy as np
+matrix_zeros = np.zeros((3, 3))
+print("Matrix filled with zeros:")
+print(matrix_zeros)
+print()
