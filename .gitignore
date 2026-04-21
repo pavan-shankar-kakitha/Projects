@@ -1,0 +1,7 @@
+facial_attendance_system
+├── app.py
+├── requirements.txt
+├── .gitignore   
+├── venv/
+├── templates/
+└── static/
