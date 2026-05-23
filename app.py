@@ -1,29 +1,50 @@
 import streamlit as st
-import joblib
 
-model = joblib.load("model.pkl")
-vectorizer = joblib.load("vectorizer.pkl")
+st.set_page_config(page_title="Workout Recommender", page_icon="💪")
 
-st.set_page_config(page_title="Spam Email Detector")
+st.title("💪 Workout Recommender System")
+st.write("Enter your details to get a personalized workout recommendation.")
 
-st.title("📧 Spam Email Detector")
-st.write("Enter an email or SMS message below and click Predict.")
+name = st.text_input("Name")
+age = st.number_input("Age", min_value=10, max_value=80, value=20)
 
-message = st.text_area("Message")
+gender = st.selectbox(
+    "Gender",
+    ["Male", "Female"]
+)
 
-if st.button("Predict"):
-    if message.strip() == "":
-        st.warning("Please enter a message.")
+goal = st.selectbox(
+    "Fitness Goal",
+    [
+        "Weight Loss",
+        "Muscle Gain",
+        "General Fitness"
+    ]
+)
+
+if st.button("Get Recommendation"):
+
+    st.subheader(f"Hello {name} 👋")
+
+    if goal == "Weight Loss":
+        st.success("Recommended Workout Plan")
+        st.write("🏃 Running - 30 mins")
+        st.write("🚴 Cycling - 20 mins")
+        st.write("🤸 Jump Rope - 15 mins")
+        st.write("🧘 Stretching - 10 mins")
+
+    elif goal == "Muscle Gain":
+        st.success("Recommended Workout Plan")
+        st.write("🏋 Push-ups - 4 sets × 15 reps")
+        st.write("🏋 Squats - 4 sets × 20 reps")
+        st.write("🏋 Dumbbell Training - 30 mins")
+        st.write("🏋 Plank - 3 sets × 60 sec")
+
     else:
-        transformed = vectorizer.transform([message])
-        prediction = model.predict(transformed)[0]
+        st.success("Recommended Workout Plan")
+        st.write("🚶 Walking - 20 mins")
+        st.write("🤸 Bodyweight Exercises - 20 mins")
+        st.write("🧘 Yoga - 15 mins")
+        st.write("🏃 Light Jogging - 15 mins")
 
-        probability = model.predict_proba(transformed)[0]
-        confidence = max(probability) * 100
-
-        if prediction == 1:
-            st.error("🚨 SPAM Message")
-        else:
-            st.success("✅ NOT SPAM Message")
-
-        st.write(f"Confidence: {confidence:.2f}%")
+    st.info("Remember to stay hydrated and maintain a balanced diet.")
