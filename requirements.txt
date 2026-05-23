@@ -1,5 +1,3 @@
-flask
-opencv-python
-opencv-contrib-python
-pillow
-numpy
+pandas
+scikit-learn
+joblib
